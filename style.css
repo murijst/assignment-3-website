@@ -361,12 +361,12 @@ body {
     font-size: clamp(1.25rem, 2vw, 1.9375rem);
     font-weight: 900;
     line-height: 1.2em;
-    white-space: nowrap;
-    /* width, overflow, text-overflow and white-space all provide the ellipsis when the h3 content is too long */
-    width: 80%;
+    white-space: normal;
+    word-break: break-word;
+    width: 100%;
     margin: 0;
     color: var(--bodyTextColorWhite);
-    overflow: hidden;
+    overflow: visible;
     transition: opacity 0.3s, bottom 0.3s;
   }
 
