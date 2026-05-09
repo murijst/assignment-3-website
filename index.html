@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="./style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MCD4740 Assignment 3</title>
+    </head>
+
+    <body>
+        <!-- ============================================ -->
+        <!--                 Navigation                   -->
+        <!-- ============================================ -->
+
+        <header id="cs-navigation">
+            <div class="cs-container">
+                <!--Nav Logo-->
+                <!--Logo is turned white in the css with a filter on dark mode-->
+                <a href="" class="cs-logo" aria-label="Return to [Company Name] Home page">
+                    <img src="./Images/pitstop.png" alt="" width="1000" height=1000 aria-hidden="true decoding=" async">
+                </a>
+                <!--Navigation List-->
+                <nav class="cs-nav" aria-label="main navigation">
+                    <!--Mobile Nav Toggle-->
+                    <button class="cs-toggle" aria-label="mobile menu toggle" aria-expanded="false"
+                        aria-controls="cs-ul-wrapper" aria-haspopup="menu">
+                        <span class="cs-box" aria-hidden="true">
+                            <span class="cs-line cs-line1"></span>
+                            <span class="cs-line cs-line2"></span>
+                            <span class="cs-line cs-line3"></span>
+                        </span>
+                    </button>
+                    <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
+                    <div class="cs-ul-wrapper" id="cs-ul-wrapper">
+                        <ul class="cs-ul">
+                            <li class="cs-li">
+                                <a href="" class="cs-li-link cs-active" aria-current="page">
+                                    Home
+                                </a>
+                            </li>
+                            <li class="cs-li">
+                                <a href="#hero-about" class="cs-li-link">
+                                    About
+                                </a>
+                            </li>
+                            <!--Copy and paste this cs-dropdown list item and replace any .cs-li with this cs-dropdown group to make a new dropdown and it will work-->
+                            <!-- Note: When copying this dropdown, update the id attribute with an appropriate name (e.g., "services-dropdown-toggle", "products-dropdown-toggle") and ensure the aria-labelledby attribute on the ul matches the button's id -->
+                            <li class="cs-li cs-dropdown">
+                                <button class="cs-li-link cs-dropdown-toggle" aria-haspopup="menu" aria-expanded="false"
+                                    id="services-dropdown-toggle">
+                                    Services
+                                    <img class="cs-drop-icon"
+                                        src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/down-gold.svg" alt=""
+                                        width="100" height="100" decoding="async" aria-hidden="true">
+                                </button>
+                                <ul class="cs-drop-ul" aria-labelledby="services-dropdown-toggle">
+                                    <li class="cs-drop-li">
+                                        <a href="#services-1724" class="cs-li-link cs-drop-link">Registration</a>
+                                    </li>
+                                    <li class="cs-drop-li">
+                                        <a href="#pricing-1790" class="cs-li-link cs-drop-link">Pricing</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="cs-li">
+                                <a href="" class="cs-li-link">
+                                    Blog
+                                </a>
+                            </li>
+                            <li class="cs-li">
+                                <a href="" class="cs-li-link">
+                                    Contact
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="cs-contact-group">
+                    <a href="tel:+84 1985 33 999" class="cs-phone">
+                        <img class="cs-phone-icon"
+                            src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/phone-1a.svg" alt="" width="24"
+                            height="24" aria-hidden="true" decoding="async">
+                        +61 1985 33 999
+                    </a>
+                    <div class="cs-social">
+                        <a target="_blank" href="https://www.facebook.com" class="cs-social-link"
+                            aria-label="Visit our Facebook page">
+                            <img class="cs-social-icon"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/facebook-1a.svg" alt=""
+                                width="12" height="12" aria-hidden="true" decoding="async">
+                        </a>
+                        <a target="_blank" href="https://x.com/home" class="cs-social-link"
+                            aria-label="Visit our Twitter page">
+                            <img class="cs-social-icon"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/twitter-1a.svg" alt=""
+                                width="12" height="12" aria-hidden="true" decoding="async">
+                        </a>
+                        <a target="_blank" href="https://www.instagram.com" class="cs-social-link"
+                            aria-label="Visit our Instagram page">
+                            <img class="cs-social-icon"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/instagram1a.svg" alt=""
+                                width="12" height="12" aria-hidden="true" decoding="async">
+                        </a>
+                        <a target="_blank"
+                            href="https://www.google.com/aclk?sa=L&ai=DChsSEwjZxOP78qaUAxV5qGYCHR2hA_UYACICCAEQABoCc20&co=1&gclid=EAIaIQobChMI2cTj-_KmlAMVeahmAh0doQP1EAAYASAAEgKtNvD_BwE&cid=CAASuwHkaNDvqiqu6R_-uQ6UmA2PD3qXpJRQx0WdmH2cjfpOc9zduCFz1tiMaGv0UQ2malzv-wa_qeWJFu5nfD0wNKRNWDibSSjeYpNz3Bsw4szyLaiAg91JCm093T7nocFxGzdc0vJ2fpLlQf_OdumOo_-kqkUKU7K_2BdOq5amVau1Zwvj7pUrbm8YVAFPqliyz9r1eYpAThyTJynzeYwhAdOCciAeZ9YYH7LoUTt7TbGh8IL4XU6ejEIhe2uI&cce=1&sig=AOD64_0p3xkHrzbAzbqvvM-tZzoOSRaelQ&q&adurl&ved=2ahUKEwjNjd378qaUAxVDumMGHT_MOqUQ0Qx6BAgMEAE"
+                            class="cs-social-link" aria-label="Visit our YouTube channel">
+                            <img class="cs-social-icon"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/youtube1a.svg" alt=""
+                                width="12" height="12" aria-hidden="true" decoding="async">
+                        </a>
+                    </div>
+                </div>
+                <!--Dark Mode toggle, uncomment button code if you want to enable a dark mode toggle-->
+                <!--<button id="dark-mode-toggle" aria-label="dark mode toggle" aria-pressed="false">
+            <svg class="cs-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" style="enable-background:new 0 0 480 480" xml:space="preserve" aria-hidden="true"><path d="M459.782 347.328c-4.288-5.28-11.488-7.232-17.824-4.96-17.76 6.368-37.024 9.632-57.312 9.632-97.056 0-176-78.976-176-176 0-58.4 28.832-112.768 77.12-145.472 5.472-3.712 8.096-10.4 6.624-16.832S285.638 2.4 279.078 1.44C271.59.352 264.134 0 256.646 0c-132.352 0-240 107.648-240 240s107.648 240 240 240c84 0 160.416-42.688 204.352-114.176 3.552-5.792 3.04-13.184-1.216-18.496z"/></svg>
+            <img class="cs-sun" aria-hidden="true" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Fsun.svg" decoding="async" alt="" width="15" height="15">
+        </button>-->
+            </div>
+        </header>
+
+        <!-- ============================================ -->
+        <!--                    Hero                      -->
+        <!-- ============================================ -->
+
+        <section id="hero-1785">
+            <div id="hero-about" class="cs-container">
+                <div class="cs-content">
+                    <span class="cs-topper">Your Car Deserves Expert Care</span>
+                    <h1 class="cs-title">Pitstop Express</h1>
+                    <p class="cs-text">
+                        Trusted automotive services in South East
+                        Melbourne. Quality repairs at honest prices.
+                    </p>
+                    <div class="cs-button-group">
+                        <a href="" class="cs-button-solid cs-button1">Get to know more here</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Background Image -->
+            <picture class="cs-background">
+                <source media="(max-width: 600px)" srcset="./Images/Mechanic-safety.jpg">
+                <source media="(min-width: 601px)" srcset="./Images/Mechanic-safety.jpg">
+                <img loading="lazy" decoding="async" src="./Images/Mechanic-safety.jpg" alt="field" width="1920"
+                    height="1200" aria-hidden="true">
+            </picture>
+
+            <img class="cs-graphic"
+                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/white-splatter2.svg" alt="graphic"
+                height="161" width="1920" loading="lazy" decoding="async">
+            <!--This is a dark version. Download the image and change the fill color to match the color of the section background below it-->
+            <img class="cs-graphic cs-graphic-dark"
+                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/dark-mode-splatter2.svg"
+                alt="graphic" height="161" width="1920" loading="lazy" decoding="async">
+        </section>
+        <!-- ============================================ -->
+        <!--                    Services                  -->
+        <!-- ============================================ -->
+
+        <section id="services-1724">
+            <div class="cs-container">
+                <div class="cs-content">
+                    <div class="cs-flex-group">
+                        <span class="cs-topper">What We Do</span>
+                        <h2 class="cs-title">Our Services</h2>
+                    </div>
+                    <p class="cs-text">
+                        Specializing Specializing in a wide range of automotive services, including Logbook Service,
+                        Auto Electrical, Mechanical Repair, tire and brake service. Our team of experienced mechanics is
+                        dedicated to providing top-notch service to keep your vehicle running smoothly and safely on the
+                        roads of South East Melbourne.
+                    </p>
+                </div>
+                <ul class="cs-card-group">
+                    <li class="cs-item">
+                        <a href="" class="cs-link">
+                            <span class="cs-number">01</span>
+                            <h3 class="cs-h3">Logbook Service</h3>
+                        </a>
+                        <picture class="cs-picture">
+                            <source media="(max-width: 600px)" srcset="./Images/Logbook.jpg">
+                            <source media="(min-width: 601px)" srcset="./Images/Logbook.jpg">
+                            <img decoding="async" src="./Images/Logbook.jpg" alt="finance" width="413" height="374"
+                                aria-hidden="true" loading="lazy">
+                        </picture>
+                    </li>
+                    <li class="cs-item">
+                        <a href="" class="cs-link">
+                            <span class="cs-number">02</span>
+                            <h3 class="cs-h3">Auto Electrical</h3>
+                        </a>
+                        <picture class="cs-picture">
+                            <source media="(max-width: 600px)" srcset="./Images/Electrical.webp">
+                            <source media="(min-width: 601px)" srcset="./Images/Electrical.webp">
+                            <img decoding="async" src="./Images/Electrical.webp" alt="finance" width="413" height="374"
+                                aria-hidden="true" loading="lazy">
+                        </picture>
+                    </li>
+                    <li class="cs-item">
+                        <a href="" class="cs-link">
+                            <span class="cs-number">03</span>
+                            <h3 class="cs-h3">Mechanical Repair</h3>
+                        </a>
+                        <picture class="cs-picture">
+                            <source media="(max-width: 600px)" srcset="./Images/Mechanical.jpg">
+                            <source media="(min-width: 601px)" srcset="./Images/Mechanical.jpg">
+                            <img decoding="async" src="./Images/Mechanical.jpg" alt="finance" width="413" height="374"
+                                aria-hidden="true" loading="lazy">
+                        </picture>
+                    </li>
+                    <li class="cs-item">
+                        <a href="" class="cs-link">
+                            <span class="cs-number">04</span>
+                            <h3 class="cs-h3">Tires Services</h3>
+                        </a>
+                        <picture class="cs-picture">
+                            <source media="(max-width: 600px)" srcset="./Images/Tire.jpg">
+                            <source media="(min-width: 601px)" srcset="/Images/Tire.jpg">
+                            <img decoding="async" src="/Images/Tire.jpg" alt="finance" width="413" height="374"
+                                aria-hidden="true" loading="lazy">
+                        </picture>
+                    </li>
+                    <li class="cs-item">
+                        <a href="" class="cs-link">
+                            <span class="cs-number">05</span>
+                            <h3 class="cs-h3">Brake Services</h3>
+                        </a>
+                        <picture class="cs-picture">
+                            <source media="(max-width: 600px)" srcset="./Images/Brake.jpg">
+                            <source media="(min-width: 601px)" srcset="./Images/Brake.jpg">
+                            <img decoding="async" src="./Images/Brake.jpg" alt="finance" width="413" height="374"
+                                aria-hidden="true" loading="lazy">
+                        </picture>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- ============================================ -->
+        <!--                   Pricing                    -->
+        <!-- ============================================ -->
+
+        <section id="pricing-1790">
+            <div class="cs-container">
+                <div class="cs-content">
+                    <div class="cs-flex">
+                        <span class="cs-topper">Pricing</span>
+                        <h2 class="cs-title">Our fastest sold out packages</h2>
+                    </div>
+                    <a href="" class="cs-button-solid">Book Appointment</a>
+                </div>
+                <div class="cs-wrapper">
+                    <ul class="cs-ul">
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            Access to All Locations around Pitstop branches
+                        </li>
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            Guranteed 24/7 Roadside Assistance
+                        </li>
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            Free Oil Change with every service
+                        </li>
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            Halal Meals Provided
+                        </li>
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            the main brach located in the heart of Melbourne city
+                        </li>
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            Free Wi-Fi and comfortable waiting areas at all branches
+                        </li>
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            Electrical car charging stations available at select locations
+                        </li>
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            Free shuttle service to nearby shopping centers and restaurants
+                        </li>
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            Complimentary car wash with every service
+                        </li>
+                        <li class="cs-li">
+                            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-check.svg" alt="checkmark"
+                                width="24" height="24">
+                            10% discount on all services for first-time customers
+                        </li>
+                    </ul>
+                    <ul class="cs-card-group">
+                        <li class="cs-item">
+                            <span class="cs-package">Brakes and Tires Services</span>
+                            <div class="cs-flex-wrapper">
+                                <span class="cs-price">$49.99</span>
+                                <span class="cs-frequency">
+                                    /Service
+                                </span>
+                            </div>
+                            <p class="cs-item-text">
+                                Includes comprehensive brake inspection, brake pad replacement, rotor resurfacing or
+                                replacement, tire rotation, wheel alignment, and tire balancing to ensure optimal safety
+                                and performance of your vehicle.
+                            </p>
+                            <a href="" class="cs-button-solid cs-price-button">Book Appointment</a>
+                        </li>
+                        <li class="cs-item cs-popular">
+                            <span class="cs-package">Auto Electrical</span>
+                            <div class="cs-flex-wrapper">
+                                <span class="cs-price">$99.99</span>
+                                <span class="cs-frequency">
+                                    /Service
+                                </span>
+                            </div>
+                            <p class="cs-item-text">
+                                This package includes diagnostics and repairs for your vehicle's electrical system,
+                                covering issues with the battery, alternator, starter motor, wiring, and electronic
+                                components to ensure your car smoothly.
+                                <a href="" class="cs-button-solid cs-price-button">Book Appointment</a>
+                        </li>
+                        <li class="cs-item">
+                            <span class="cs-package">Monthly Wash</span>
+                            <div class="cs-flex-wrapper">
+                                <span class="cs-price">$149.99</span>
+                                <span class="cs-frequency">
+                                    /Service
+                                </span>
+                            </div>
+                            <p class="cs-item-text">
+                                This package includes a comprehensive monthly car wash and detailing service, featuring
+                                exterior hand washing, interior vacuuming, window cleaning, tire and wheel cleaning, and
+                                a protective wax application to keep your vehicle looking its best all month long.
+                            </p>
+                            <a href="" class="cs-button-solid cs-price-button">Book Appointment</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- SVG Graphic -->
+            <img class="cs-graphic cs-light"
+                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/white-texture.svg" alt="graphic"
+                height="1920" width="483" loading="lazy" decoding="async" aria-hidden="true">
+            <!--Dark mode graphic, download and save locally, then open the file in your code editor and change the fill color to match the background color of the section below it on dark mode-->
+            <img class="cs-graphic cs-dark"
+                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/dark-spatter.svg" alt="graphic"
+                height="1920" width="483" loading="lazy" decoding="async" aria-hidden="true">
+        </section>
+
+        <!-- ============================================ -->
+        <!--                   Footer                     -->
+        <!-- ============================================ -->
+
+        <footer id="cs-footer-269">
+            <div class="cs-container">
+                <!-- Logo Group -->
+                <div class="cs-logo-group">
+                    <a aria-label="go back to home" class="cs-logo" href="">
+                        <img class="cs-logo-img light" aria-hidden="true" loading="lazy" decoding="async"
+                            src="./Images/Aboriginal.png" alt="logo" width="240" height="32">
+
+                        <img class="cs-logo-img light" aria-hidden="true" loading="lazy" decoding="async"
+                            src="./Images/Torres.jpg" alt="logo" width="240" height="32">
+                    </a>
+                    <p class="cs-text">
+                        We acknowledge the Traditional Custodians of the land on which we operate, and we pay our
+                        respects to their Elders past, present, and emerging. We are committed to fostering a culture of
+                        inclusion and respect for all Indigenous peoples and their rich cultural heritage.
+                    </p>
+                </div>
+                <!-- Links -->
+                <ul class="cs-nav">
+                    <li class="cs-nav-li">
+                        <span class="cs-header">Sitemap</span>
+                    </li>
+                    <li class="cs-nav-li">
+                        <a class="cs-nav-link" href="">Home</a>
+                    </li>
+                    <li class="cs-nav-li">
+                        <a class="cs-nav-link" href="#hero-about">About</a>
+                    </li>
+                    <li class="cs-nav-li">
+                        <a class="cs-nav-link" href="#services-1724"></a>
+                    </li>
+                    <li class="cs-nav-li">
+                        <a class="cs-nav-link" href="">Our History</a>
+                    </li>
+                    <li class="cs-nav-li">
+                        <a class="cs-nav-link" href="">Contact</a>
+                    </li>
+                </ul>
+                <!-- Contact Info -->
+                <ul class="cs-contact">
+                    <li class="cs-nav-li">
+                        <span class="cs-header">Contact</span>
+                    </li>
+                    <li class="cs-contact-li">
+                        <a class="cs-contact-link" href="tel: 123-456-7890">+61 1985 33 999</a>
+                    </li>
+                    <li class="cs-contact-li">
+                        <a class="cs-contact-link" href="mailto:info@codestitch.com">Pitstopexpress@gmail.com</a>
+                    </li>
+                    <!-- Social Media -->
+                    <li class="cs-contact-li cs-social-group">
+                        <div class="cs-social">
+                            <a class="cs-social-link" aria-label="visit google profile" href="">
+                                <img class="cs-social-img" aria-hidden="true" loading="lazy" decoding="async"
+                                    src="https://csimg.nyc3.digitaloceanspaces.com/Social/google.svg" alt="google"
+                                    width="11" height="11">
+                            </a>
+                            <a class="cs-social-link" aria-label="visit facebook profile" href="">
+                                <img class="cs-social-img" aria-hidden="true" loading="lazy" decoding="async"
+                                    src="https://csimg.nyc3.digitaloceanspaces.com/Social/Facebook.svg" alt="facebook"
+                                    width="6" height="11">
+                            </a>
+                            <a class="cs-social-link" aria-label="visit instagram profile" href="">
+                                <img class="cs-social-img" aria-hidden="true" loading="lazy" decoding="async"
+                                    src="https://csimg.nyc3.digitaloceanspaces.com/Social/instagram.svg" alt="instagram"
+                                    width="11" height="11">
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+
+        <script src="./script.js"></script>
+    </body>
+
+</html>
