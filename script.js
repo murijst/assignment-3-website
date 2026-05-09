@@ -335,26 +335,28 @@
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  // 2) Simple WhatsApp popup for booking buttons
+  // 2) WhatsApp booking popup — triggered by phone link & "Book Appointment" buttons
   const WA_NUMBER = '61198533999';
   const WA_MESSAGE = encodeURIComponent(
-    'Halo Monash Tour, I want to book the tour via website.'
+    "Hi Pitstop Express, I'd like to book a service via your website."
   );
 
   const waOverlay = document.createElement('div');
   waOverlay.style.cssText =
-    'position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:10000;padding:16px;';
+    'position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:10000;padding:16px;';
 
   const waBox = document.createElement('div');
   waBox.style.cssText =
-    'background:#fff;border-radius:12px;max-width:360px;width:100%;padding:20px;font-family:Arial,sans-serif;';
+    'background:#fff;border-radius:12px;max-width:380px;width:100%;padding:24px;font-family:Arial,sans-serif;box-shadow:0 20px 50px rgba(0,0,0,.3);';
 
   waBox.innerHTML = `
-        <h3 style="margin:0 0 8px 0;">Send to Whatsapp?</h3>
-        <p style="margin:0 0 16px 0;font-size:14px;line-height:1.5;">Continue booking via Whatsapp.</p>
+        <h3 style="margin:0 0 8px 0;color:#1a1a1a;">Book via WhatsApp</h3>
+        <p style="margin:0 0 18px 0;font-size:14px;line-height:1.5;color:#4e4b66;">
+          We'll open WhatsApp with a pre-filled booking message. Reply to confirm your service date.
+        </p>
         <div style="display:flex;gap:8px;justify-content:flex-end;">
-            <button type="button" data-wa-cancel style="padding:8px 12px;border:1px solid #ccc;background:#fff;border-radius:8px;cursor:pointer;">Batal</button>
-            <button type="button" data-wa-send style="padding:8px 12px;border:none;background:#25D366;color:#fff;border-radius:8px;cursor:pointer;">Kirim WA</button>
+            <button type="button" data-wa-cancel style="padding:10px 14px;border:1px solid #ccc;background:#fff;border-radius:8px;cursor:pointer;font-weight:600;">Cancel</button>
+            <button type="button" data-wa-send style="padding:10px 14px;border:none;background:#25D366;color:#fff;border-radius:8px;cursor:pointer;font-weight:700;">Send via WhatsApp</button>
         </div>
     `;
 
@@ -369,9 +371,12 @@
     waOverlay.style.display = 'none';
   };
 
+  // Trigger from header phone link AND any "Book Appointment / Book A Service" CTA
   document.addEventListener('click', event => {
-    const phoneLink = event.target.closest('.cs-phone');
-    if (!phoneLink) return;
+    const trigger = event.target.closest(
+      '.cs-phone, .cs-price-button, .cs-button1, #pricing-1790 .cs-button-solid'
+    );
+    if (!trigger) return;
 
     event.preventDefault();
     openWaPopup();
