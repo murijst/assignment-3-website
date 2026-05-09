@@ -403,4 +403,89 @@
       closeWaPopup();
     }
   });
+
+  // 3) Lightbox gallery for service cards
+  const lightbox = document.createElement('div');
+  lightbox.className = 'cs-lightbox';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.setAttribute('aria-label', 'Service image gallery');
+  lightbox.innerHTML = `
+    <button type="button" class="cs-lightbox-close" aria-label="Close image">&times;</button>
+    <button type="button" class="cs-lightbox-nav cs-lightbox-prev" aria-label="Previous image">&#8249;</button>
+    <figure class="cs-lightbox-figure">
+      <img class="cs-lightbox-img" src="" alt="">
+      <figcaption class="cs-lightbox-caption"></figcaption>
+    </figure>
+    <button type="button" class="cs-lightbox-nav cs-lightbox-next" aria-label="Next image">&#8250;</button>
+  `;
+  document.body.appendChild(lightbox);
+
+  const lbImg = lightbox.querySelector('.cs-lightbox-img');
+  const lbCaption = lightbox.querySelector('.cs-lightbox-caption');
+  const serviceItems = Array.from(
+    document.querySelectorAll('#services-1724 .cs-item')
+  );
+  let currentIndex = 0;
+
+  const showImage = index => {
+    const item = serviceItems[index];
+    if (!item) return;
+    const img = item.querySelector('.cs-picture img');
+    const title = item.querySelector('.cs-h3')?.textContent.trim() || '';
+    if (!img) return;
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = title;
+    lbCaption.textContent = title;
+    currentIndex = index;
+  };
+
+  const openLightbox = index => {
+    showImage(index);
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
+  const navigate = direction => {
+    const next = (currentIndex + direction + serviceItems.length) % serviceItems.length;
+    showImage(next);
+  };
+
+  // Click on service card → open lightbox
+  serviceItems.forEach((item, index) => {
+    item.style.cursor = 'zoom-in';
+    item.addEventListener('click', event => {
+      // Don't hijack if user is clicking an actual link (none have real hrefs, but safe)
+      const link = event.target.closest('a');
+      if (link && link.getAttribute('href') && link.getAttribute('href') !== '') return;
+      event.preventDefault();
+      openLightbox(index);
+    });
+  });
+
+  lightbox.addEventListener('click', event => {
+    if (event.target === lightbox || event.target.closest('.cs-lightbox-close')) {
+      closeLightbox();
+      return;
+    }
+    if (event.target.closest('.cs-lightbox-prev')) {
+      navigate(-1);
+      return;
+    }
+    if (event.target.closest('.cs-lightbox-next')) {
+      navigate(1);
+    }
+  });
+
+  document.addEventListener('keydown', event => {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (event.key === 'Escape') closeLightbox();
+    else if (event.key === 'ArrowLeft') navigate(-1);
+    else if (event.key === 'ArrowRight') navigate(1);
+  });
 })();
