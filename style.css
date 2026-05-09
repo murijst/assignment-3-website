@@ -16,9 +16,20 @@
   --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
 }
 
+html {
+  /* offset anchor jumps so they don't sit under the fixed nav (nav top:2rem + height ~6rem + buffer) */
+  scroll-padding-top: 9rem;
+}
+
 body {
   margin: 0;
   padding: 0;
+}
+
+@media only screen and (max-width: 1023.5px) {
+  html {
+    scroll-padding-top: 7rem;
+  }
 }
 
 *,
